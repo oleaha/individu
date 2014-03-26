@@ -1,10 +1,13 @@
 <?php
+ini_set('display_startup_errors',1);
+ini_set('display_errors',1);
+error_reporting(-1);
+
 require_once('source.php');
 
 if(isset($_POST['make'])) {
 	$source = new newsletterSource();
-	
-	$output = $source->productBlock($_POST['link'],$_POST['image'],$_POST['brand'],$_POST['desc'], $_POST['price']);
+	$output = $source->productBlock($_POST['link'],$_POST['image'],$_POST['brand'],$_POST['desc'], $_POST['price'], $_POST['utm']);
 }
 else {
 	$output = "";
@@ -22,6 +25,10 @@ else {
 <body>
     <form method="post" action="">
         <table>
+        	<tr>
+                <td>Google UTM:</td>
+                <td><input type="text" name="utm" value="<?php if(isset($_POST['make'])) { echo $_POST['utm']; } ?>"></td>
+            </tr>
             <tr>
                 <td>Link:</td>
                 <td><input type="text" name="link"></td>
