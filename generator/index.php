@@ -1,48 +1,10 @@
 <?php
-//Test
+require_once('source.php');
 
 if(isset($_POST['make'])) {
-	$output .= '
-							<!-- START -->
-                            <table align="left" width="150" cellpadding="0" cellspacing="0" border="0" style="border-collapse:collapse; mso-table-lspace:0pt; mso-table-rspace:0pt; a:hover:">
-                            	<!-- IMAGE -->
-                                <tr>
-                                    <td align="left" valign="top">
-	                                    <a href="'.$_POST['link'].'?utm_source=nyhetsbrev&utm_medium=email&utm_campaign=nyhetsbrevMars" style="color:#444444; text-decoration: none;">
-	                                    	<img src="'.$_POST['image'].'" alt="" width="150" height="177" border="0"> 
-	                                    </a>
-                                    </td>
-                                </tr>
-                                <!-- BRAND -->
-                                <tr>
-                                    <td align="center" valign="top">
-	                                    <a href="'.$_POST['link'].'?utm_source=nyhetsbrev&utm_medium=email&utm_campaign=nyhetsbrevMars" style="color:#444444; text-decoration: none;">
-	                                    	<h1 style="font-size: 20px; margin: 5px 0px 7px; font-family: Oswald, sans-serif; font-weight: 400; color: rgb(255, 102, 51); text-transform: uppercase; line-height: 1; text-align: center;">'.$_POST['brand'].'</h1>
-	                                    </a>
-                                    </td>
-                                </tr>
-                                <!-- DESC -->
-                                <tr>
-                                	<td align="center" valign="top">
-	                                	<a href="'.$_POST['link'].'?utm_source=nyhetsbrev&utm_medium=email&utm_campaign=nyhetsbrevMars" style="color:#444444; text-decoration: none;">
-	                                		<h1 style="font-size: 14px; margin: 0px 0px 7px; font-family: Oswald, sans-serif; font-weight: 200; color: rgb(255, 102, 51); text-transform: uppercase; line-height: 1; text-align: center;">'.$_POST['desc'].'</h1>
-	                                	</a>
-                                	</td>
-                                </tr>
-                                <!-- PRICE -->
-                                <tr>
-                                    <td align="center" valign="top">
-                                    	<a href="'.$_POST['link'].'?utm_source=nyhetsbrev&utm_medium=email&utm_campaign=nyhetsbrevMars" style="color:#444444; text-decoration: none;">
-	                                    	<h1 style="font-size: 20px; margin: 0px 0px 7px; font-family: Oswald, sans-serif; font-weight: 400; color: rgb(255, 102, 51); text-transform: uppercase; line-height: 1; text-align: center;">
-												<span style="font-size: 12px;">Nå:</span>
-												'.$_POST['price'].',-
-											</h1>
-                                    	</a>
-                                    </td>
-                                </tr>
-                            </table>
-                            <!-- END -->	
-	';
+	$source = new newsletterSource();
+	
+	$output = $source->productBlock($_POST['link'],$_POST['image'],$_POST['brand'],$_POST['desc'], $_POST['price']);
 }
 else {
 	$output = "";
