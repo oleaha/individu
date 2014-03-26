@@ -1,4 +1,5 @@
 <?php
+session_start();
 ini_set('display_startup_errors',1);
 ini_set('display_errors',1);
 error_reporting(-1);
@@ -8,9 +9,15 @@ require_once('source.php');
 if(isset($_POST['make'])) {
 	$source = new newsletterSource();
 	$output = $source->productBlock($_POST['link'],$_POST['image'],$_POST['brand'],$_POST['desc'], $_POST['price'], $_POST['utm']);
+	$_SESSION['output'] = $output;
 }
 else {
 	$output = "";
+}
+
+if(isset($_POST['addToFile'])) {
+	$do = file_put_contents('test.txt', $_SESSION['output'], FILE_APPEND);
+	$_SESSION['output'] = "";
 }
 
 ?>
@@ -54,10 +61,8 @@ else {
                 <td><input type="text" name="price"></td>
             </tr>
         </table>
-        <input type="submit" name="make">
+        <input type="submit" name="make"><input type="submit" name="addToFile" value="Add to textfile">
     </form>
-    <br />
-    <br />
-    <textarea cols="200" rows="40"><?php echo $output;?></textarea>
+    <textarea cols="100" rows="40"><?php echo $output;?></textarea>
 </body>
 </html>
