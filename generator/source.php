@@ -1,5 +1,5 @@
 <?php
-
+//Test
 class newsletterSource {
 	
 	private $brandSize = 20;
