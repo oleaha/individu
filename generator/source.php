@@ -56,6 +56,27 @@ class newsletterSource {
 		return $output;
 	}	
 	
+	public function productLineStart() {
+		$output = '
+		<tr>
+            <td class="full_width" align="center" width="100%" bgcolor="#FFFFFF">
+                <table class="table_scale" width="600" align="center" cellpadding="0" cellspacing="0" border="0">
+                    <tr>
+                        <td>';
+		
+		return $output;
+	}
+	
+	public function productLineEnd() {
+		$output = '
+						</td>
+                    </tr>
+                </table>
+            </td>
+        </tr>';
+		
+		return $output;
+	}
 	
 }
 
