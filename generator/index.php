@@ -8,6 +8,7 @@ error_reporting(-1);
 */
 
 require_once('source.php');
+$date = date('Y-m-d');
 
 if(isset($_POST['make'])) {
 	
@@ -31,21 +32,25 @@ if(isset($_POST['make'])) {
 
 	$_SESSION['output'] = $output;
 	
-	
 }
 else {
 	$output = "";
 }
 
 if(isset($_POST['addToFile'])) {
-	$date = date('Y-m-d');
-	$do = file_put_contents($date.'.txt', $_SESSION['output'], FILE_APPEND);
+	$do = file_put_contents('files/'.$date.'.html', $_SESSION['output'], FILE_APPEND);
 	$_SESSION['output'] = "";
 }
 if(isset($_POST['resetSession'])) {
 	$_SESSION['count'] = 0;
 }
-
+if(isset($_POST['resetUTM'])) {
+	$_SESSION['utm'] = "";
+}
+if(isset($_POST['deleteLast'])) {
+	$source = new newsletterSource();
+	$source->deleteLast($date);
+}
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2//EN">
 <html>
@@ -87,7 +92,12 @@ if(isset($_POST['resetSession'])) {
                 <td><input type="text" name="price"></td>
             </tr>
         </table>
-        <input type="submit" name="make"><input type="submit" name="addToFile" value="Add to textfile"><input type="submit" name="resetSession" value="Reset Session">
+        <input type="submit" name="make">
+        <input type="submit" name="addToFile" value="Add to textfile">
+        <input type="submit" name="resetSession" value="Reset Session">
+        <input type="submit" name="resetUTM" value="Reset UTM Link">
+        <a href="files/<?php echo $date; ?>.html">Preview</a>
+        <input type="submit" name="deleteLast" value="Delete last">
     </form>
     <textarea cols="100" rows="40"><?php echo $output;?></textarea>
 </body>

@@ -5,6 +5,7 @@ class newsletterSource {
 	private $brandSize = 20;
 	private $descSize = 14;
 	private $priceSize = 12;
+	private $source = array();
 
 	public function __construct($brandFontSize = NULL, $descFontSize = NULL, $priceFontSize = NULL) {
 		if(!empty($brandFontSize)) {
@@ -52,7 +53,7 @@ class newsletterSource {
                     </tr>
 			  </table>
               <!-- END -->';
-		
+		$this->addToArray($output);
 		return $output;
 	}	
 	
@@ -78,6 +79,20 @@ class newsletterSource {
 		return $output;
 	}
 	
+	public function addToArray($input) {
+		$this->source[] = $input;
+	}
+	
+	public function getSource() {
+		return $this->source;
+	}
+	
+	public function deleteLast($date) {
+		array_pop($this->getSource());
+		foreach($this->getSource() as $element) {
+			$do = file_put_contents('files/'.$date.'.html', $element);
+		}
+	}
 }
 
 
