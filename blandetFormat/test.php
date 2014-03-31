@@ -5,7 +5,7 @@
 		<title>Blandet format - MIINTO.NO</title>
 	</head>
 	<body style="font-family: 'calibri';">
-		<form method="get" action="blandetFormat.php">
+		<form method="get" action="blandetFormat.php" target="_blank">
 			<table>
 				<tr>
 					<td>Ordrenummer:</td>
